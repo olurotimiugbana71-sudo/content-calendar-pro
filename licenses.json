@@ -1,0 +1,14 @@
+{
+  "CAL-52B7-9562-F4F9": {
+    "email": "test@test.com",
+    "tier": "premium",
+    "created": "2026-06-17T08:09:26.126406",
+    "expires": "2026-07-17T08:09:26.126406"
+  },
+  "CAL-F416-C7DA-EE15": {
+    "email": "demo@apexdynamics.com",
+    "tier": "premium",
+    "created": "2026-06-17T08:20:27.610441",
+    "expires": "2026-07-17T08:20:27.610441"
+  }
+}

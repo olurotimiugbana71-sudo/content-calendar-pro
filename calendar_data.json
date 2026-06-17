@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "date": "2026-06-17",
+    "time": "9 AM",
+    "platform": "Instagram",
+    "content_type": "Post",
+    "caption": "5 Python libraries that will save you 10+ hours per week! \n\n1. Pandas - Data analysis made easy\n2. Streamlit - Build apps in minutes\n3. FastAPI - Lightning fast APIs\n4. Pytest - Catch bugs before they catch you\n5. Rich - Beautiful terminal output\n\nWhich one do you use most? Drop a comment! \ud83d\udc47\n\n#Python #Coding #Productivity",
+    "hashtags": [
+      "#community",
+      "#pythoncode",
+      "#innovation",
+      "#like",
+      "#coding",
+      "#startup",
+      "#techcommunity",
+      "#digital",
+      "#developer",
+      "#devlife",
+      "#techie",
+      "#appdev",
+      "#webdev",
+      "#technews",
+      "#learnprogramming"
+    ],
+    "industry": "Technology",
+    "status": "Scheduled",
+    "created": "2026-06-17T18:56:47.940491"
+  }
+]
