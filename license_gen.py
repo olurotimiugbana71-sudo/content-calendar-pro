@@ -1,8 +1,7 @@
-"""
-License Generator - Content Calendar Pro
-Copyright 2026 ApexDynamics Solutions | Built by Rotimi Ugbana
-"""
-import hashlib, uuid, json, os
+import hashlib
+import uuid
+import json
+import os
 from datetime import datetime, timedelta
 
 class LicenseManager:
@@ -24,7 +23,8 @@ class LicenseManager:
         key = hashlib.sha256(raw.encode()).hexdigest()[:20].upper()
         formatted = f"CAL-{key[:4]}-{key[4:8]}-{key[8:12]}"
         self.licenses[formatted] = {
-            "email": email, "tier": tier,
+            "email": email,
+            "tier": tier,
             "created": datetime.now().isoformat(),
             "expires": (datetime.now() + timedelta(days=365)).isoformat()
         }
@@ -32,22 +32,13 @@ class LicenseManager:
         return formatted
     
     def validate(self, key, email=""):
-    # Master key for testing
-    if key == "CAL-TEST-DEMO-1234" and email == "demo@apexdynamics.com":
-        return True, "Valid - Demo Access"
-    
-    if key in self.licenses:
-        data = self.licenses[key]
-        if datetime.now() > datetime.fromisoformat(data["expires"]):
-            return False, "Expired"
-        if email and data["email"].lower() != email.lower():
-            return False, "Email mismatch"
-        return True, "Valid"
-    return False, "Invalid"
-
-if __name__ == "__main__":
-    lm = LicenseManager()
-    email = input("Buyer email: ")
-    tier = input("Tier (basic/standard/premium): ")
-    key = lm.generate_key(email, tier)
-    print(f"\nLICENSE: {key}")
+        if key == "CAL-TEST-DEMO-1234" and email == "demo@apexdynamics.com":
+            return True, "Valid - Demo Access"
+        if key in self.licenses:
+            data = self.licenses[key]
+            if datetime.now() > datetime.fromisoformat(data["expires"]):
+                return False, "Expired"
+            if email and data["email"].lower() != email.lower():
+                return False, "Email mismatch"
+            return True, "Valid"
+        return False, "Invalid"
