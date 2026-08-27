@@ -1,3 +1,7 @@
+"""
+Content Calendar Engine
+Copyright 2026 ApexDynamics Solutions | Built by Rotimi Ugbana
+"""
 from datetime import datetime, timedelta
 import json, os
 
@@ -50,7 +54,6 @@ class ContentCalendar:
             platforms[p["platform"]] = platforms.get(p["platform"], 0) + 1
             statuses[p["status"]] = statuses.get(p["status"], 0) + 1
             types[p["content_type"]] = types.get(p["content_type"], 0) + 1
-        
         return {
             "total_posts": len(self.posts),
             "by_platform": platforms,
