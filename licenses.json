@@ -10,5 +10,11 @@
     "tier": "premium",
     "created": "2026-06-17T08:20:27.610441",
     "expires": "2026-07-17T08:20:27.610441"
+  },
+  "CAL-08FF-B983-63E9": {
+    "email": "demo@apexdynamics.com",
+    "tier": "premium",
+    "created": "2026-08-27T13:37:14.479566",
+    "expires": "2027-08-27T13:37:14.479566"
   }
 }
