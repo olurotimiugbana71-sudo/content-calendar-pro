@@ -19,7 +19,7 @@ from datetime import datetime
 COMPANY = "ApexDynamics Solutions"
 DEVELOPER = "Rotimi Ugbana"
 YEAR = "2026"
-VERSION = "v1.0"
+VERSION = "v1.1"
 
 st.markdown("""
 <style>
@@ -39,6 +39,14 @@ st.markdown("""
         font-size: 12px;
         color: #667EEA;
     }
+    .preview-banner {
+        background: #fff3cd;
+        border: 2px solid #ffc107;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin: 15px 0;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -56,20 +64,12 @@ with st.sidebar:
     st.markdown(f"## {COMPANY}")
     st.markdown("### 💰 Pricing")
     
-    with st.expander("🥉 Basic - $9.99/mo"):
+    with st.expander("Full Access License - N15,000", expanded=True):
         st.write("✓ Content Calendar")
-        st.write("✓ 50 Hashtags/Month")
-        st.write("✓ 3 Platforms")
-    
-    with st.expander("🥈 Standard - $24.99/mo ⭐"):
-        st.write("✓ Unlimited Hashtags")
-        st.write("✓ All Platforms")
+        st.write("✓ AI Hashtag Engine")
+        st.write("✓ Best Posting Times")
         st.write("✓ Analytics Dashboard")
-    
-    with st.expander("🥇 Premium - $49.99/mo 👑"):
-        st.write("✓ Content Ideas Generator")
-        st.write("✓ Best Time Recommendations")
-        st.write("✓ Priority Support")
+        st.write("✓ 1-Year License")
     
     st.markdown("---")
     st.markdown("### 🔑 License Activation")
@@ -86,13 +86,22 @@ with st.sidebar:
             st.error(f"❌ {msg}")
     
     if st.session_state.licensed:
-        st.success("🔓 Licensed - Full Access")
+        st.success("🔓 Licensed")
     else:
         st.info("🔒 Preview Mode")
 
 # Main Content
 st.markdown(f'<h1 class="main-header">📅 Content Calendar Pro</h1>', unsafe_allow_html=True)
 st.markdown(f"### Plan, Create & Schedule Content | {COMPANY}")
+
+if not st.session_state.licensed:
+    st.markdown("""
+    <div class="preview-banner">
+        <h3>🔒 PREVIEW MODE</h3>
+        <p>Generate hashtags and preview features. <strong>Activate license</strong> for full access.</p>
+        <p style="font-size:14px;">💰 Full Access: N15,000 (1-Year License)</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 industry = st.selectbox("Industry", ["Technology", "Business", "Health", "Fashion", "Food", "Travel"])
 
@@ -106,25 +115,25 @@ with tab1:
         platform = st.selectbox("Platform", ["Instagram", "Facebook", "Twitter", "LinkedIn", "TikTok", "YouTube"])
     with c2:
         caption = st.text_area("Caption", height=120)
-        if st.button("💡 Generate Ideas"):
+        if st.button("Generate Ideas"):
             for idea in hashtag_engine.get_ideas(industry):
                 st.info(idea)
     
     hashtag_count = st.slider("Hashtags", 5, 30, 15)
-    if st.button("🎯 Generate Hashtags", type="primary"):
+    if st.button("Generate Hashtags", type="primary"):
         st.session_state.tags = hashtag_engine.get_hashtags(industry, hashtag_count)
     
     if 'tags' in st.session_state:
         tags_html = " ".join([f'<span class="hashtag">{h}</span>' for h in st.session_state.tags])
         st.markdown(tags_html, unsafe_allow_html=True)
     
-    if st.button("📅 Schedule Post", type="primary"):
+    if st.button("Schedule Post", type="primary"):
         post = calendar.add_post({
             "date": post_date.strftime("%Y-%m-%d"), "time": post_time,
             "platform": platform, "caption": caption,
             "hashtags": st.session_state.get('tags', []), "industry": industry
         })
-        st.success(f"✅ Post scheduled for {post['date']}!")
+        st.success(f"Post scheduled for {post['date']}!")
         st.balloons()
 
 with tab2:
@@ -145,19 +154,8 @@ with tab3:
         st.components.v1.html(viz.summary_cards(analytics), height=100)
         if analytics['by_platform']:
             st.image(f"data:image/png;base64,{viz.platform_chart(analytics['by_platform'])}", width=500)
-        upcoming = calendar.get_upcoming(5)
-        if upcoming:
-            st.markdown("### Upcoming Posts")
-            for p in upcoming:
-                st.markdown(f"📅 {p['date']} | {p['time']} | {p['platform']}")
     else:
         st.info("Create posts to see analytics!")
 
-# Footer
 st.markdown("---")
-st.markdown(f"""
-<div style="text-align:center;color:#666;">
-    <p><strong>Content Calendar Pro {VERSION}</strong></p>
-    <p>© {YEAR} {COMPANY} | Built by {DEVELOPER}</p>
-</div>
-""", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align:center;'>© {YEAR} {COMPANY} | Built by {DEVELOPER} | {VERSION}</p>", unsafe_allow_html=True)
